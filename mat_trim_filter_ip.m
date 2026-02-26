@@ -184,28 +184,26 @@ for f = 1:numel(fileNames)
 
     %% ================= PLOTTING ===========================
 
+    %% ================= PLOTTING ===========================
+
+    numPlots = numel(signalNames);
+    
     figure('Name', [baseName ' - Full Signals'], 'Color','w');
-
-    subplot(numel(signalNames),1,1)
-    plot(Time_ms, IP7); grid on; ylabel('IP7')
-    hold on
-    yl = ylim;
-    plot([start_time_ms start_time_ms], yl, 'g--');
-    plot([end_time_ms end_time_ms], yl, 'r--');
-    hold off
-
-    p = 2;
+    
     for s = 1:numel(signalNames)
-        if strcmp(signalNames{s}, 'IP7'); continue; end
-        subplot(numel(signalNames),1,p)
-        plot(Time_ms, T.(signalNames{s})); grid on
+    
+        subplot(numPlots,1,s)
+    
+        plot(Time_ms, T.(signalNames{s}));
+        grid on
+        ylabel(signalNames{s})
+    
         hold on
         yl = ylim;
         plot([start_time_ms start_time_ms], yl, 'g--');
         plot([end_time_ms end_time_ms], yl, 'r--');
         hold off
-        ylabel(signalNames{s});
-        p = p + 1;
+    
     end
 
     figure('Name', [baseName ' - Plasma Only'], 'Color','w');
